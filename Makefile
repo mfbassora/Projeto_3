@@ -6,7 +6,11 @@ PASS_SO=Release/P3.so
 CPP_FILES=$(wildcard $(SRC_DIR)/*.cpp)
 OBJ_FILES=$(addprefix $(SRC_DIR)/, $(notdir $(CPP_FILES:.cpp=.o)))
 
-LOADABLE_MODULE_OPTIONS=-shared -Wl -O1
+ifeq ($(shell uname),Darwin)
+LOADABLE_MODULE_OPTIONS=-bundle -undefined dynamic_lookup
+else
+LOADABLE_MODULE_OPTIONS=-shared -Wl,-O1
+endif
 
 CXX=g++
 COMMON_FLAGS=-Wall -Wextra -fvisibility=hidden
