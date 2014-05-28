@@ -21,6 +21,7 @@ namespace {
         int remove =0;
      for (Function::iterator i = F.begin(), e = F.end(); i != e; ++i)
      {
+         //Liveness
          
          //Para cada BasicBLock vamos olhar seu anterior para comparar
          for (BasicBlock::iterator i2 = i->begin(), e2 = i->end(); i2 != e2; )
@@ -38,6 +39,13 @@ namespace {
       return true;
     }
   };
+  bool check_Inst(Instruction * intruction)
+  {
+      bool situation = true;
+      //Verificando condições
+      
+      return situation;
+  }
 }
 
 char deadCodeElim::ID = 0;
