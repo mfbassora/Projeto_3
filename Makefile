@@ -6,7 +6,7 @@ PASS_SO=Release/P3.so
 CPP_FILES=$(wildcard $(SRC_DIR)/*.cpp)
 OBJ_FILES=$(addprefix $(SRC_DIR)/, $(notdir $(CPP_FILES:.cpp=.o)))
 
-LOADABLE_MODULE_OPTIONS=-shared -Wl,-O1
+LOADABLE_MODULE_OPTIONS=-shared -Wl -O1
 
 CXX=g++
 COMMON_FLAGS=-Wall -Wextra -fvisibility=hidden
