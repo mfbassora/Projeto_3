@@ -28,7 +28,8 @@ namespace {
         //Liveness
     for (Function::iterator i = F.begin(), e = F.end(); i != e; ++i)
      {
-
+         errs() << "Basic block (name=" << i->getName() << ") has "
+             << i->size() << " instructions.\n";
          //Liveness
          
          //Para cada BasicBLock vamos olhar seu anterior para comparar
@@ -37,13 +38,9 @@ namespace {
              bool teste;
              teste = check_Inst(i2);
              errs()<<teste<<"\n";
-          }
-             
-        }
-        
-            errs() << "Basic block (name=" << i->getName() << ") has "
-             << i->size() << " instructions.\n";
-        
+         
+           
+         }
         }
             
        
