@@ -108,8 +108,9 @@ do7:                                              ; preds = %while9
   %tmp21 = getelementptr i32* %tmp20, i32 %tmp22
   %tmp23 = load i32* %tmp21
   store i32 %tmp23, i32* %aux03
+  %tmp24 = load i32* %aux03
   %tmp25 = load i32* %v
-  %tmp26 = icmp slt i32 %tmp23, %tmp25
+  %tmp26 = icmp slt i32 %tmp24, %tmp25
   %tmp27 = sub i1 true, %tmp26
   br i1 %tmp27, label %then10, label %else12
 
@@ -304,8 +305,9 @@ define i32 @__Init_QS(%class.QS* %this, i32 %sz) {
 entry0:
   %sz_tmp = alloca i32
   store i32 %sz, i32* %sz_tmp
+  %tmp0 = load i32* %sz_tmp
   %tmp1 = getelementptr %class.QS* %this, i32 0, i32 2
-  store i32 %sz, i32* %tmp1
+  store i32 %tmp0, i32* %tmp1
   %tmp2 = load i32* %sz_tmp
   %tmp4 = call i8* @malloc(i32 12)
   %tmp3 = bitcast i8* %tmp4 to { i32, i32* }*
