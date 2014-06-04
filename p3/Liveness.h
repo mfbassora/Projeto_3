@@ -17,10 +17,12 @@
 using namespace llvm;
 
 namespace { 
+ 
     DenseMap<const Instruction*, int> instMap;
 
   void print_elem(const Instruction* i) {
-    errs() << instMap.lookup(i) << " ";
+    errs() << i->getName() << " ";
+     
   };
     
   class genKill {
@@ -34,6 +36,7 @@ namespace {
     std::set<const Instruction*> before;
     std::set<const Instruction*> after;
   };
+     
 }
 
 
@@ -48,6 +51,9 @@ void computeIBeforeAfter(Function &F, DenseMap<const BasicBlock*, beforeAfter> &
 public:
 static char ID;
 char * name;
+DenseMap<const Instruction*, beforeAfter> riBAMap;
+DenseMap<const BasicBlock*, genKill> rbbGKMap;
+DenseMap<const BasicBlock*, beforeAfter> rbbBAMap;
 Liveness() : FunctionPass(ID) {}
 virtual bool runOnFunction(Function &F); // implementação no Liveness.cpp
 bool test2(char * string);

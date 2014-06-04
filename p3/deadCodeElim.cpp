@@ -21,27 +21,39 @@ namespace {
     bool check_Inst(Instruction * instruction);
     deadCodeElim() : FunctionPass(ID) {}
 
-    virtual bool runOnFunction(Function &F) {   
+    virtual bool runOnFunction(Function &F) {  
+        int count=0;
         Liveness &Live = getAnalysis<Liveness>();
-        errs() << Live.name;
-        Live.test2("Ronaldo \n");
         //Liveness
     for (Function::iterator i = F.begin(), e = F.end(); i != e; ++i)
      {
          
-         //Para cada BasicBLock vamos olhar seu anterior para comparar
          for (BasicBlock::iterator i2 = i->begin(), e2 = i->end(); i2 != e2; ++i2)
          {
-             bool teste;
-             teste = check_Inst(i2);
-//             errs()<<teste<<"\n";
-         
+             //Para cada instrução vamos verificar ela tem def
+             Instruction * i = i2;
+             if(i2->getName() != ""){
+             //É uma definição de variável
+             beforeAfter s = Live.riBAMap.lookup(i2);
+             if(!s.after.count(i2) && check_Inst(i2)){
+                 count++;
+//             errs() << "Def: " << i2->getName() << "\n";
+//             errs() << "In: ";
+//             std::for_each(s.before.begin(), s.before.end(), print_elem);
+//             errs() << "\n";
+//              errs() << "Out: ";              
+//             std::for_each(s.after.begin(), s.after.end(), print_elem);
+//             errs() << "\n\n";
+            // errs() << i2->getName() << "\n";
+             };
+             };
            
          }
+         
         }
             
        
-          
+         errs() << count << "\n";
       return true;
     }
     virtual void getAnalysisUsage(AnalysisUsage &AU) const {

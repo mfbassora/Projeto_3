@@ -40,11 +40,15 @@ void Liveness::computeBBGenKill(Function &F, DenseMap<const BasicBlock*, genKill
     void Liveness::computeBBBeforeAfter(Function &F, DenseMap<const BasicBlock*, genKill> &bbGKMap,
                               DenseMap<const BasicBlock*, beforeAfter> &bbBAMap)
     {
+       
+      
       SmallVector<BasicBlock*, 32> workList;
       workList.push_back(--F.end());
 
       while (!workList.empty()) {
+          
         BasicBlock *b = workList.pop_back_val();
+        //Pega a classe before_after referente ao bloco basico
         beforeAfter b_beforeAfter = bbBAMap.lookup(b);
         bool shouldAddPred = !bbBAMap.count(b);
         genKill b_genKill = bbGKMap.lookup(b);
@@ -106,34 +110,35 @@ void Liveness::computeIBeforeAfter(Function &F, DenseMap<const BasicBlock*, befo
 bool Liveness::runOnFunction(Function &F) {
     // Iterate over the instructions in F, creating a map from instruction address to unique integer.
     addToMap(F);
-
+    errs() << "Liveness na Funcao: " << F.getName() << "\n";
     bool changed = false;
 
     // LLVM Value classes already have use information. But for the sake of learning, we will implement the iterative algorithm.
 
-    DenseMap<const BasicBlock*, genKill> bbGKMap;
+//    DenseMap<const BasicBlock*, genKill> bbGKMap;
     // For each basic block in the function, compute the block's GEN and KILL sets.
-    computeBBGenKill(F, bbGKMap);
+    computeBBGenKill(F, rbbGKMap);
 
-    DenseMap<const BasicBlock*, beforeAfter> bbBAMap;
+//    DenseMap<const BasicBlock*, beforeAfter> bbBAMap;
     // For each basic block in the function, compute the block's liveBefore and liveAfter sets.
-    computeBBBeforeAfter(F, bbGKMap, bbBAMap);
+    //computeBBBeforeAfter(F, bbGKMap, bbBAMap);
 
-    DenseMap<const Instruction*, beforeAfter> iBAMap;
-    computeIBeforeAfter(F, bbBAMap, iBAMap);
+//    DenseMap<const Instruction*, beforeAfter> iBAMap;
+    computeIBeforeAfter(F, rbbBAMap, riBAMap);
 
-    for (inst_iterator i = inst_begin(F), E = inst_end(F); i != E; ++i) {
-        beforeAfter s = iBAMap.lookup(&*i);
-        errs() << "%" << instMap.lookup(&*i) << ": { ";
-        std::for_each(s.before.begin(), s.before.end(), print_elem);
-        errs() << "} { ";
-        std::for_each(s.after.begin(), s.after.end(), print_elem);
-        errs() << "}\n";
-    }
+//    for (inst_iterator i = inst_begin(F), E = inst_end(F); i != E; ++i) {
+//        beforeAfter s = iBAMap.lookup(&*i);
+//        errs() << i->getName() << "\n";
+//        errs() << "%" << instMap.lookup(&*i) << ": { ";
+//        std::for_each(s.before.begin(), s.before.end(), print_elem);
+//        errs() << "} { ";
+//        std::for_each(s.after.begin(), s.after.end(), print_elem);
+//        errs() << "}\n";
+//    }
 
 
 
-
+ 
     return changed;
 }
 

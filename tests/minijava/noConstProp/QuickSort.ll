@@ -12,7 +12,6 @@ entry0:
   %tmp4 = getelementptr [4 x i8] * @.formatting.string, i32 0, i32 0
   %tmp5 = call i32 (i8 *, ...)* @printf(i8 * %tmp4, i32 %tmp3)
   %tmp6 = load i32 * %tmp0
-  %tmp121 = alloca i32
   ret i32 %tmp6
 }
 define i32 @__Start_QS(%class.QS *  %this, i32  %sz) {
