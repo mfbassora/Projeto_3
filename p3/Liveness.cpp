@@ -139,6 +139,7 @@ bool Liveness::runOnFunction(Function &F) {
 
 bool Liveness::test2(char * string) {
     errs() << string << "\n";
+    return true;
 }
 char llvm::Liveness::ID = 0;
 RegisterPass<Liveness> X("Liveness", "Liveness analysis", false, false);

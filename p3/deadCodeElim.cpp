@@ -1,4 +1,3 @@
-#include "Liveness.h"
 
 #include "llvm/Pass.h"
 #include "llvm/IR/Function.h"
@@ -13,7 +12,7 @@
 #include "llvm/Support/CFG.h"
 #include "llvm/ADT/SmallVector.h"
 #include "llvm/IR/IntrinsicInst.h"
-
+#include "Liveness.h"
 using namespace llvm;
 
 namespace {
@@ -23,9 +22,9 @@ namespace {
     deadCodeElim() : FunctionPass(ID) {}
 
     virtual bool runOnFunction(Function &F) {   
-       Liveness &Live = getAnalysis<Liveness>();
-       errs() << Live.name;
-       Live.test2("Ronaldo \n");
+        Liveness &Live = getAnalysis<Liveness>();
+        errs() << Live.name;
+        Live.test2("Ronaldo \n");
         //Liveness
     for (Function::iterator i = F.begin(), e = F.end(); i != e; ++i)
      {
@@ -35,7 +34,7 @@ namespace {
          {
              bool teste;
              teste = check_Inst(i2);
-             errs()<<teste<< ""<<i2->getID()<<"\n";
+//             errs()<<teste<<"\n";
          
            
          }

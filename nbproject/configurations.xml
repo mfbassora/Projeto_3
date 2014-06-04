@@ -4,9 +4,7 @@
     <df root="." name="Compiladores_Projeto_3">
       <df name="p3">
         <in>Hello.cpp</in>
-        <in>Liveness.cpp</in>
         <in>Liveness.h</in>
-        <in>printCGF.cpp</in>
       </df>
     </df>
     <logicalFolder name="ExternalFiles"
@@ -37,15 +35,16 @@
           <buildCommand>${MAKE} -f Makefile</buildCommand>
           <cleanCommand>${MAKE} -f Makefile clean</cleanCommand>
           <executablePath></executablePath>
+          <ccTool>
+            <incDir>
+              <pElem>.</pElem>
+            </incDir>
+          </ccTool>
         </makeTool>
       </makefileType>
       <item path="p3/Hello.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="p3/Liveness.cpp" ex="false" tool="1" flavor2="0">
-      </item>
       <item path="p3/Liveness.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="p3/printCGF.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
   </confs>

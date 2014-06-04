@@ -14,9 +14,10 @@
 #include "llvm/ADT/SmallVector.h"
 #include "llvm/Support/CFG.h"
 
+using namespace llvm;
 
 namespace { 
-    ADT::DenseMap<const Instruction*, int> instMap;
+    DenseMap<const Instruction*, int> instMap;
 
   void print_elem(const Instruction* i) {
     errs() << instMap.lookup(i) << " ";
