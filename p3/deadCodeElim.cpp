@@ -1,4 +1,4 @@
-#include "GenKill.h"
+#include "Liveness.h"
 
 #include "llvm/Pass.h"
 #include "llvm/IR/Function.h"
@@ -22,22 +22,20 @@ namespace {
     bool check_Inst(Instruction * instruction);
     deadCodeElim() : FunctionPass(ID) {}
 
-    virtual bool runOnFunction(Function &F) {
-       GenKill &GK = getAnalysis<GenKill>();
-       errs() << GK.name;
+    virtual bool runOnFunction(Function &F) {   
+       Liveness &Live = getAnalysis<Liveness>();
+       errs() << Live.name;
+       Live.test2("Ronaldo \n");
         //Liveness
     for (Function::iterator i = F.begin(), e = F.end(); i != e; ++i)
      {
-         errs() << "Basic block (name=" << i->getName() << ") has "
-             << i->size() << " instructions.\n";
-         //Liveness
          
          //Para cada BasicBLock vamos olhar seu anterior para comparar
          for (BasicBlock::iterator i2 = i->begin(), e2 = i->end(); i2 != e2; ++i2)
          {
              bool teste;
              teste = check_Inst(i2);
-             errs()<<teste<<"\n";
+             errs()<<teste<< ""<<i2->getID()<<"\n";
          
            
          }
@@ -48,7 +46,7 @@ namespace {
       return true;
     }
     virtual void getAnalysisUsage(AnalysisUsage &AU) const {
-   AU.addRequired<GenKill>();
+   AU.addRequired<Liveness>();
    }
   };
 
@@ -58,19 +56,19 @@ namespace {
       //Verificando condicoes
       if(instruction->mayHaveSideEffects()){
           situation = false;
-          errs()<<"entrou side effect \n";
+          
       }
       if(llvm::TerminatorInst::classof(instruction)){
           situation = false;
-          errs()<<"entrou terminator \n";
+          
       }
       if(llvm::LandingPadInst::classof(instruction)){
           situation = false;
-          errs()<<"entrou landingpad \n";
+         
       }
       if(llvm::DbgInfoIntrinsic::classof(instruction)){
           situation = false;
-          errs()<<"entrou dbginfo \n";
+         
       }
       return situation;
   }
