@@ -37,14 +37,14 @@ namespace {
              beforeAfter s = Live.riBAMap.lookup(i2);
              if(!s.after.count(i2) && check_Inst(i2)){
                  count++;
-//             errs() << "Def: " << i2->getName() << "\n";
-//             errs() << "In: ";
-//             std::for_each(s.before.begin(), s.before.end(), print_elem);
-//             errs() << "\n";
-//              errs() << "Out: ";              
-//             std::for_each(s.after.begin(), s.after.end(), print_elem);
-//             errs() << "\n\n";
-            // errs() << i2->getName() << "\n";
+             errs() << "Def: " << i2->getName() << "\n";
+             errs() << "In: ";
+             std::for_each(s.before.begin(), s.before.end(), print_elem);
+             errs() << "\n";
+              errs() << "Out: ";              
+             std::for_each(s.after.begin(), s.after.end(), print_elem);
+             errs() << "\n\n";
+             errs() << i2->getName() << "\n";
              };
              };
            
