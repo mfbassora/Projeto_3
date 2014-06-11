@@ -52,9 +52,9 @@ void computeIBeforeAfter(Function &F, DenseMap<const BasicBlock*, beforeAfter> &
 public:
 static char ID;
 char * name;
-DenseMap<const Instruction*, beforeAfter> riBAMap;
-DenseMap<const BasicBlock*, genKill> rbbGKMap;
-DenseMap<const BasicBlock*, beforeAfter> rbbBAMap;
+DenseMap<const Instruction*, beforeAfter> iBAMap;
+DenseMap<const BasicBlock*, genKill> bbGKMap;
+DenseMap<const BasicBlock*, beforeAfter> bbBAMap;
 Liveness() : FunctionPass(ID) {}
 virtual bool runOnFunction(Function &F); // implementação no Liveness.cpp
 bool test2(char * string);
